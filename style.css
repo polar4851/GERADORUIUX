@@ -1,413 +1,104 @@
-/* Importação de fonte do Google Fonts (Inter é moderna e legível) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* Variáveis CSS para fácil customização de cores */
-:root {
-    --primary-color: #6C63FF; /* Um roxo/azul vibrante */
-    --secondary-color: #8D8BEE; /* Um tom mais claro do primário */
-    --accent-color: #00C896; /* Um verde turquesa para destaque */
-    --background-light: #F4F7FC; /* Fundo muito claro e suave */
-    --background-dark: #FFFFFF; /* Fundo para cards e seções */
-    --text-dark: #2C3E50; /* Texto principal escuro */
-    --text-light: #7F8C8D; /* Texto secundário ou labels */
-    --border-light: #E0E6EF; /* Bordas suaves */
-    --shadow-light: rgba(0, 0, 0, 0.05); /* Sombra bem sutil */
-    --shadow-medium: rgba(0, 0, 0, 0.1); /* Sombra um pouco mais pronunciada */
-    --code-bg: #282c34; /* Fundo do bloco de código */
-    --code-text: #abb2bf; /* Cor do texto do código */
-}
-
-/* Base reset e tipografia */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    background-color: var(--background-light);
-    color: var(--text-dark);
-    display: flex;
-    min-height: 100vh;
-    padding: 20px; /* Adiciona um respiro nas bordas da tela */
-}
-
-/* Contêiner principal */
-.container {
-    display: flex;
-    width: 100%;
-    max-width: 1400px; /* Limita a largura máxima para melhor leitura */
-    margin: auto; /* Centraliza o contêiner */
-    border-radius: 12px;
-    overflow: hidden; /* Garante que as bordas arredondadas funcionem com o box-shadow interno */
-    box-shadow: 0 10px 30px var(--shadow-medium); /* Sombra mais destacada para o container */
-}
-
-/* Sidebar de Personalização */
-.sidebar {
-    width: 380px; /* Um pouco mais larga para acomodar os inputs */
-    background-color: var(--background-dark);
-    padding: 30px;
-    box-shadow: 4px 0 15px var(--shadow-light); /* Sombra para profundidade */
-    overflow-y: auto;
-    border-right: 1px solid var(--border-light); /* Linha divisória suave */
-}
-
-.sidebar h1 {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 40px;
-    font-size: 1.8em;
-    font-weight: 700;
-}
-
-.sidebar h2 {
-    font-size: 1.3em;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    color: var(--primary-color); /* H2s com a cor primária */
-    border-bottom: 2px solid var(--border-light); /* Linha mais definida */
-    padding-bottom: 8px;
-    font-weight: 600;
-}
-
-.sidebar label {
-    display: block;
-    margin-top: 18px;
-    margin-bottom: 6px;
-    font-weight: 500;
-    font-size: 0.95em;
-    color: var(--text-light);
-}
-
-.sidebar input[type="text"],
-.sidebar input[type="number"],
-.sidebar select,
-.sidebar textarea {
-    width: 100%; /* Ocupa 100% da largura */
-    padding: 12px 15px;
-    margin-bottom: 12px;
-    border: 1px solid var(--border-light);
-    border-radius: 8px; /* Bordas mais arredondadas */
-    font-size: 1em;
-    color: var(--text-dark);
-    transition: all 0.3s ease; /* Transição suave ao focar */
-    background-color: var(--background-light); /* Fundo leve para inputs */
-}
-
-.sidebar input[type="text"]:focus,
-.sidebar input[type="number"]:focus,
-.sidebar select:focus,
-.sidebar textarea:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2); /* Sombra de foco colorida */
-    outline: none;
-}
-
-.sidebar input[type="color"] {
-    width: 60px; /* Largura menor para o color picker */
-    height: 38px;
-    padding: 0;
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    cursor: pointer;
-    vertical-align: middle; /* Alinha com o label */
-}
-
-.sidebar textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.component-options {
-    display: none;
-    animation: fadeIn 0.4s ease-out; /* Animação mais suave */
-}
-
-.component-options.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.generate-code-btn {
-    display: block;
-    width: 100%;
-    padding: 15px 25px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px; /* Bordas mais arredondadas */
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 600;
-    margin-top: 40px; /* Mais espaço antes do botão */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeito de scale */
-    box-shadow: 0 5px 15px var(--shadow-medium); /* Sombra no botão */
-}
-
-.generate-code-btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px); /* Pequeno lift ao passar o mouse */
-}
-
-.generate-code-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px var(--shadow-medium);
-}
-
-/* Conteúdo Principal (Pré-visualização e Código) */
-.main-content {
-    flex-grow: 1;
-    padding: 30px; /* Mais padding */
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* Espaçamento entre as seções */
-    background-color: var(--background-light);
-}
-
-.preview-section, .code-section {
-    background-color: var(--background-dark);
-    padding: 30px;
-    border-radius: 12px; /* Bordas mais arredondadas */
-    box-shadow: 0 5px 15px var(--shadow-light); /* Sombra suave */
-}
-
-.preview-section h2, .code-section h2 {
-    color: var(--text-dark);
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 1.6em;
-    font-weight: 700;
-    text-align: center;
-}
-
-.component-preview {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 250px; /* Altura mínima maior para o preview */
-    border: 2px dashed var(--border-light); /* Borda tracejada mais visível */
-    border-radius: 10px;
-    background-color: #fcfdff; /* Fundo ligeiramente diferente para o preview */
-    padding: 25px;
+    min-height: 100vh;
+    margin: 0;
 }
 
-/* --- ESTILOS DOS COMPONENTES GERADOS (MINIMALISTAS NO CSS, MAIORIA VIA JS) --- */
-
-/* Botão Moderno */
-.generated-button {
-    cursor: pointer;
-    border: none; /* Sempre sem borda */
-    letter-spacing: 0.5px;
-}
-
-/* Efeitos Hover do Botão (aplicados via classe pelo JS) */
-.button-hover-lift:hover {
-    transform: translateY(-3px);
-}
-.button-hover-lift:active {
-    transform: translateY(0);
-}
-
-.button-hover-shine {
-    position: relative;
-    overflow: hidden;
-}
-.button-hover-shine::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2); /* Brilho branco */
-    transform: skewX(-20deg);
-    transition: left 0.5s ease;
-}
-.button-hover-shine:hover::after {
-    left: 100%;
-}
-
-.button-hover-darken:hover {
-    filter: brightness(0.9);
-}
-
-
-/* Campo de Texto (Input) Moderno */
-.generated-input {
-    outline: none; /* Remove outline padrão ao focar */
-}
-
-.generated-input::placeholder {
-    opacity: 0.7;
-}
-
-/* Card Moderno */
-.generated-card {
-    border: none;
-    cursor: pointer;
-}
-
-/* Estilos de sub-elementos do Card (sempre definidos aqui) */
-.generated-card h3 {
-    margin-top: 0;
-    font-weight: 600;
-    margin-bottom: 12px;
-    border-bottom: 1px solid var(--border-light); /* Separador sutil */
-    padding-bottom: 8px;
-}
-
-.generated-card p {
-    line-height: 1.7;
-    margin-bottom: 0;
-}
-
-/* Efeitos Hover do Card (aplicados via classe pelo JS) */
-.card-hover-lift:hover {
-    transform: translateY(-5px);
-}
-
-.card-hover-pop:hover {
-    transform: scale(1.02);
-}
-
-
-/* Seção de Código */
-.code-tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.code-tab-btn {
-    background-color: transparent;
-    border: none;
-    padding: 12px 20px;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--text-light);
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-    font-size: 1em;
-}
-
-.code-tab-btn.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-}
-
-.code-tab-btn:hover:not(.active) {
-    color: var(--primary-color);
-}
-
-.code-panel {
-    display: none;
-    position: relative;
+.container {
+    background-color: #fff;
+    padding: 30px;
     border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
 }
 
-.code-panel.active {
-    display: block;
+h1 {
+    color: #333;
+    margin-bottom: 25px;
 }
 
-.code-panel pre {
-    background-color: var(--code-bg);
-    color: var(--code-text);
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 0.95em;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+.task-section {
+    margin-bottom: 25px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
 }
 
-.copy-code-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: rgba(0, 0, 0, 0.4);
+h2 {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
     color: white;
+    padding: 10px 20px;
     border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.85em;
-    font-weight: 500;
+    font-size: 16px;
     transition: background-color 0.3s ease;
-    opacity: 0.8;
 }
 
-.copy-code-btn:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 1;
+button:hover {
+    background-color: #0056b3;
 }
 
-/* Responsividade */
-@media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-        max-width: 90%;
-    }
-    .sidebar {
-        width: 100%;
-        max-height: 60vh;
-        box-shadow: 0 4px 15px var(--shadow-light);
-        border-right: none;
-        border-bottom: 1px solid var(--border-light);
-        border-radius: 12px 12px 0 0;
-    }
-    .main-content {
-        padding: 20px;
-    }
-    .preview-section, .code-section {
-        padding: 25px;
-    }
+#taskList {
+    list-style: none;
+    padding: 0;
+    text-align: left;
 }
 
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    .sidebar {
-        padding: 20px;
-    }
-    .sidebar h1 {
-        font-size: 1.6em;
-        margin-bottom: 25px;
-    }
-    .sidebar h2 {
-        font-size: 1.1em;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    .generate-code-btn {
-        font-size: 1em;
-        padding: 12px 20px;
-        margin-top: 25px;
-    }
-    .preview-section h2, .code-section h2 {
-        font-size: 1.4em;
-    }
-    .component-preview {
-        min-height: 180px;
-    }
-    .code-panel pre {
-        font-size: 0.85em;
-        padding: 15px;
-    }
-    .copy-code-btn {
-        position: static;
-        margin-top: 10px;
-        width: 100%;
-        opacity: 1;
-    }
+#taskList li {
+    background-color: #f9f9f9;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eee;
+}
+
+#taskList li.completed {
+    text-decoration: line-through;
+    color: #888;
+    background-color: #e0e0e0;
+}
+
+#taskList li button {
+    padding: 6px 10px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+#taskList li .actions button.complete-btn {
+    background-color: #28a745;
+}
+
+#taskList li .actions button.complete-btn:hover {
+    background-color: #218838;
+}
+
+#taskList li .actions button.delete-btn {
+    background-color: #dc3545;
+}
+
+#taskList li .actions button.delete-btn:hover {
+    background-color: #c82333;
 }
