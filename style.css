@@ -199,75 +199,110 @@ body {
     transition: all 0.2s ease-in-out; /* Transição para updates de estilo */
 }
 
-/* Estilos para os componentes gerados (botão, input, card) */
+/* --- ESTILOS DOS COMPONENTES GERADOS (MAIS MODERNOS) --- */
+
+/* Botão Moderno */
 .generated-button {
-    padding: 12px 25px;
-    background-color: #6C63FF; /* Cor padrão, será sobrescrita pelo inline style */
+    padding: 12px 28px; /* Mais preenchimento horizontal */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); /* Gradiente vibrante */
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px; /* Mais arredondado */
     cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+    font-size: 1.05em; /* Ligeiramente maior */
+    font-weight: 600; /* Mais ousado */
+    letter-spacing: 0.5px; /* Pequeno espaçamento entre letras */
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3); /* Sombra mais pronunciada e colorida */
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); /* Curva de animação suave */
+    position: relative; /* Para efeitos hover */
+    overflow: hidden; /* Para o efeito de brilho */
 }
 
 .generated-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(108, 99, 255, 0.3);
+    transform: translateY(-3px); /* Levanta mais ao passar o mouse */
+    box-shadow: 0 12px 30px rgba(108, 99, 255, 0.4); /* Sombra maior */
 }
 
 .generated-button:active {
     transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(108, 99, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
 }
 
+/* Efeito de brilho no hover (opcional, mas moderno) */
+.generated-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Brilho branco */
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+}
+
+.generated-button:hover::after {
+    left: 100%;
+}
+
+/* Campo de Texto (Input) Moderno */
 .generated-input {
-    padding: 12px 15px;
-    border: 1px solid #E0E6EF;
-    border-radius: 8px;
+    padding: 12px 18px; /* Mais preenchimento */
+    border: 2px solid var(--border-light); /* Borda mais visível */
+    border-radius: 10px; /* Bordas mais arredondadas */
     font-size: 1em;
-    color: #2C3E50;
-    width: 300px; /* Largura padrão para inputs */
+    color: var(--text-dark);
+    width: 320px; /* Largura um pouco maior */
     background-color: #FFFFFF;
-    box-shadow: 0 2px 5px var(--shadow-light);
-    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06); /* Sombra suave */
+    transition: all 0.3s ease;
 }
 
 .generated-input::placeholder {
-    color: #AAB7B8;
+    color: var(--text-light); /* Placeholder com cor do texto secundário */
+    opacity: 0.7; /* Levemente transparente */
 }
 
 .generated-input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.25); /* Sombra de foco mais forte e colorida */
     outline: none;
+    background-color: #FFF; /* Garante que o fundo não mude no foco */
 }
 
+/* Card Moderno */
 .generated-card {
-    background-color: #FFFFFF;
-    border: 1px solid #E0E6EF;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 8px 25px var(--shadow-medium); /* Sombra mais forte para o card */
-    max-width: 350px; /* Largura um pouco maior */
-    text-align: center;
-    transition: all 0.2s ease;
+    background: linear-gradient(145deg, #FFFFFF, #F8F9FB); /* Gradiente suave no fundo */
+    border: none; /* Sem borda, apenas sombra */
+    border-radius: 18px; /* Bordas bem arredondadas */
+    padding: 30px; /* Mais preenchimento */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Sombra pronunciada e elegante */
+    max-width: 380px; /* Largura um pouco maior */
+    text-align: left; /* Texto alinhado à esquerda */
+    transition: all 0.3s ease;
+    cursor: grab; /* Indica que pode ser "arrastado" visualmente (sem funcionalidade real) */
+}
+
+.generated-card:hover {
+    transform: translateY(-5px); /* Levanta mais ao passar o mouse */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Sombra ainda maior */
 }
 
 .generated-card h3 {
     margin-top: 0;
     color: var(--text-dark);
-    font-size: 1.4em;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-size: 1.6em; /* Título maior */
+    font-weight: 700; /* Mais ousado */
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-light); /* Separador sutil */
+    padding-bottom: 8px;
 }
 
 .generated-card p {
     color: var(--text-light);
-    font-size: 0.95em;
-    line-height: 1.6;
+    font-size: 1em; /* Texto do parágrafo um pouco maior */
+    line-height: 1.7; /* Espaçamento entre linhas confortável */
+    margin-bottom: 0;
 }
 
 /* Seção de Código */
