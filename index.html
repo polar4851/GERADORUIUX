@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Componentes UI/UX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1>Gerador de Componentes UI/UX</h1>
+
+            <div class="component-selector">
+                <label for="componentType">Escolha o Componente:</label>
+                <select id="componentType">
+                    <option value="button">Botão</option>
+                    <option value="input">Campo de Texto</option>
+                    <option value="card">Card</option>
+                    </select>
+            </div>
+
+            <div id="buttonOptions" class="component-options active">
+                <h2>Opções do Botão</h2>
+                <label for="buttonText">Texto:</label>
+                <input type="text" id="buttonText" value="Clique Aqui">
+
+                <label for="buttonBgColor">Cor de Fundo:</label>
+                <input type="color" id="buttonBgColor" value="#007bff">
+
+                <label for="buttonTextColor">Cor do Texto:</label>
+                <input type="color" id="buttonTextColor" value="#ffffff">
+
+                <label for="buttonPadding">Preenchimento (px):</label>
+                <input type="number" id="buttonPadding" value="10" min="0">
+
+                <label for="buttonBorderRadius">Borda Arredondada (px):</label>
+                <input type="number" id="buttonBorderRadius" value="5" min="0">
+
+                <label for="buttonFontSize">Tamanho da Fonte (px):</label>
+                <input type="number" id="buttonFontSize" value="16" min="8">
+
+                <label for="buttonWidth">Largura (px, opcional):</label>
+                <input type="number" id="buttonWidth" value="" placeholder="Automático" min="0">
+
+                <label for="buttonHeight">Altura (px, opcional):</label>
+                <input type="number" id="buttonHeight" value="" placeholder="Automático" min="0">
+            </div>
+
+            <div id="inputOptions" class="component-options">
+                <h2>Opções do Campo de Texto</h2>
+                <label for="inputTextPlaceholder">Placeholder:</label>
+                <input type="text" id="inputTextPlaceholder" value="Digite algo...">
+
+                <label for="inputBorderColor">Cor da Borda:</label>
+                <input type="color" id="inputBorderColor" value="#ccc">
+
+                <label for="inputBgColor">Cor de Fundo:</label>
+                <input type="color" id="inputBgColor" value="#ffffff">
+
+                <label for="inputTextColor">Cor do Texto:</label>
+                <input type="color" id="inputTextColor" value="#333">
+
+                 <label for="inputPadding">Preenchimento (px):</label>
+                <input type="number" id="inputPaddingInput" value="10" min="0">
+
+                <label for="inputBorderRadius">Borda Arredondada (px):</label>
+                <input type="number" id="inputBorderRadius" value="4" min="0">
+
+                <label for="inputFontSize">Tamanho da Fonte (px):</label>
+                <input type="number" id="inputFontSize" value="16" min="8">
+            </div>
+
+             <div id="cardOptions" class="component-options">
+                <h2>Opções do Card</h2>
+                <label for="cardTitle">Título do Card:</label>
+                <input type="text" id="cardTitle" value="Título do Card">
+
+                <label for="cardContent">Conteúdo do Card:</label>
+                <textarea id="cardContent">Este é o conteúdo do seu card. Personalize como quiser!</textarea>
+
+                <label for="cardBgColor">Cor de Fundo:</label>
+                <input type="color" id="cardBgColor" value="#f8f9fa">
+
+                <label for="cardBorderColor">Cor da Borda:</label>
+                <input type="color" id="cardBorderColor" value="#e0e0e0">
+
+                <label for="cardBorderRadius">Borda Arredondada (px):</label>
+                <input type="number" id="cardBorderRadiusCard" value="8" min="0">
+
+                <label for="cardPadding">Preenchimento (px):</label>
+                <input type="number" id="cardPaddingCard" value="20" min="0">
+
+                <label for="cardShadow">Sombra (valores CSS):</label>
+                <input type="text" id="cardShadow" value="0 4px 8px rgba(0,0,0,0.1)" placeholder="Ex: 0 4px 8px rgba(0,0,0,0.1)">
+            </div>
+
+            <button class="generate-code-btn" onclick="generateCode()">Gerar Código</button>
+        </aside>
+
+        <main class="main-content">
+            <section class="preview-section">
+                <h2>Pré-visualização do Componente</h2>
+                <div class="component-preview" id="componentPreview">
+                    <button class="generated-button">Clique Aqui</button>
+                </div>
+            </section>
+
+            <section class="code-section">
+                <h2>Código Gerado</h2>
+                <div class="code-tabs">
+                    <button class="code-tab-btn active" onclick="showCodeTab('html')">HTML</button>
+                    <button class="code-tab-btn" onclick="showCodeTab('css')">CSS</button>
+                    <button class="code-tab-btn" onclick="showCodeTab('js')">JavaScript (se aplicável)</button>
+                </div>
+                <div id="htmlCode" class="code-panel active">
+                    <pre><code class="language-html"></code></pre>
+                    <button class="copy-code-btn" onclick="copyCode('html')">Copiar HTML</button>
+                </div>
+                <div id="cssCode" class="code-panel">
+                    <pre><code class="language-css"></code></pre>
+                    <button class="copy-code-btn" onclick="copyCode('css')">Copiar CSS</button>
+                </div>
+                <div id="jsCode" class="code-panel">
+                    <pre><code class="language-javascript"></code></pre>
+                    <button class="copy-code-btn" onclick="copyCode('js')">Copiar JavaScript</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
