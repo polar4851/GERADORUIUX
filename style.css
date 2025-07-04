@@ -1,61 +1,159 @@
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); /* Fundo degradê suave */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    overflow: hidden; /* Esconde overflow para as formas de fundo */
+    color: #333;
 }
 
+/* Animação de fundo com formas */
+.background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+    filter: blur(50px);
+    animation: float 15s infinite ease-in-out alternate;
+}
+
+.shape1 {
+    width: 200px;
+    height: 200px;
+    background: #FFC0CB; /* Rosa claro */
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.shape2 {
+    width: 300px;
+    height: 300px;
+    background: #ADD8E6; /* Azul claro */
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 5s;
+}
+
+.shape3 {
+    width: 250px;
+    height: 250px;
+    background: #90EE90; /* Verde claro */
+    top: 30%;
+    right: 20%;
+    animation-delay: 10s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -20px) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Container principal com efeito de vidro (Glassmorphism) */
 .container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.15); /* Fundo semi-transparente */
+    backdrop-filter: blur(15px); /* Efeito de desfoque */
+    -webkit-backdrop-filter: blur(15px); /* Suporte para navegadores WebKit */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda sutil */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); /* Sombra elegante */
+    padding: 40px;
     width: 90%;
-    max-width: 600px;
+    max-width: 650px;
     text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeInScale 0.8s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 25px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
 .task-section {
-    margin-bottom: 25px;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
+    margin-bottom: 30px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px; /* Espaçamento inferior */
+}
+
+.task-section:first-child {
+    border-top: none; /* Remove a borda superior do primeiro elemento */
 }
 
 h2 {
-    color: #555;
-    margin-bottom: 15px;
+    color: #4a69bd; /* Cor vibrante para subtítulos */
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 500;
 }
 
-input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
+input[type="text"],
+textarea {
+    width: calc(100% - 24px);
+    padding: 14px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
     font-size: 16px;
+    background: rgba(255, 255, 255, 0.7); /* Fundo semi-transparente para inputs */
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    resize: vertical; /* Permite redimensionar verticalmente o textarea */
+    min-height: 50px; /* Altura mínima para o textarea */
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    background: #fff;
 }
 
 button {
-    background-color: #007bff;
+    background: linear-gradient(45deg, #007bff, #00c6ff); /* Degradê nos botões */
     color: white;
-    padding: 10px 20px;
+    padding: 14px 25px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-size: 17px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
 }
 
 button:hover {
-    background-color: #0056b3;
+    transform: translateY(-3px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+    background: linear-gradient(45deg, #0056b3, #0099cc);
 }
 
 #taskList {
@@ -65,40 +163,103 @@ button:hover {
 }
 
 #taskList li {
-    background-color: #f9f9f9;
-    padding: 12px;
-    margin-bottom: 8px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente para itens da lista */
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #eee;
+    flex-direction: column; /* Permite empilhar título e descrição */
+    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden; /* Para o efeito de animação */
+}
+
+#taskList li:hover {
+    transform: scale(1.01); /* Leve aumento ao passar o mouse */
+    background: rgba(255, 255, 255, 0.3);
 }
 
 #taskList li.completed {
     text-decoration: line-through;
     color: #888;
-    background-color: #e0e0e0;
+    background: rgba(200, 200, 200, 0.15); /* Mais transparente para completadas */
+    opacity: 0.7;
 }
 
-#taskList li button {
-    padding: 6px 10px;
+#taskList li.completed .task-title {
+    color: #777; /* Cor mais suave para título de tarefas completas */
+}
+
+.task-content {
+    flex-grow: 1;
+    margin-right: 15px;
+    width: 100%; /* Ocupa largura total para o conteúdo */
+}
+
+.task-title {
+    font-weight: 500;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 5px;
+    display: block; /* Para garantir que o título ocupe a linha toda */
+}
+
+.task-description {
+    color: #555;
+    font-size: 0.9em;
+    line-height: 1.5;
+    white-space: pre-wrap; /* Preserva quebras de linha no texto */
+    margin-bottom: 10px; /* Espaço antes dos botões */
+    display: block; /* Para garantir que a descrição ocupe a linha toda */
+}
+
+#taskList li .actions {
+    margin-top: 10px; /* Espaço entre a descrição e os botões */
+    align-self: flex-end; /* Alinha os botões à direita */
+}
+
+#taskList li .actions button {
+    padding: 8px 15px;
     font-size: 14px;
     margin-left: 10px;
+    border-radius: 8px;
+    box-shadow: none; /* Remove sombra extra nos botões pequenos */
 }
 
 #taskList li .actions button.complete-btn {
-    background-color: #28a745;
+    background: linear-gradient(45deg, #28a745, #21c954);
 }
 
 #taskList li .actions button.complete-btn:hover {
-    background-color: #218838;
+    background: linear-gradient(45deg, #218838, #1ea044);
+    transform: translateY(-2px);
 }
 
 #taskList li .actions button.delete-btn {
-    background-color: #dc3545;
+    background: linear-gradient(45deg, #dc3545, #ff4c6a);
 }
 
 #taskList li .actions button.delete-btn:hover {
-    background-color: #c82333;
+    background: linear-gradient(45deg, #c82333, #e63955);
+    transform: translateY(-2px);
+}
+
+/* Animação de entrada para os itens da lista */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#taskList li {
+    animation: slideInUp 0.5s ease-out forwards;
+    opacity: 0; /* Começa invisível para a animação */
 }
