@@ -1,142 +1,189 @@
-/* Importação de fonte do Google Fonts (opcional) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+/* Importação de fonte do Google Fonts (Inter é moderna e legível) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Variáveis CSS para fácil customização de cores */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --background-color: #f4f7f6;
-    --sidebar-bg: #ffffff;
-    --text-color: #333;
-    --border-color: #e0e0e0;
-    --code-bg: #282c34;
-    --code-text: #abb2bf;
+    --primary-color: #6C63FF; /* Um roxo/azul vibrante */
+    --secondary-color: #8D8BEE; /* Um tom mais claro do primário */
+    --accent-color: #00C896; /* Um verde turquesa para destaque */
+    --background-light: #F4F7FC; /* Fundo muito claro e suave */
+    --background-dark: #FFFFFF; /* Fundo para cards e seções */
+    --text-dark: #2C3E50; /* Texto principal escuro */
+    --text-light: #7F8C8D; /* Texto secundário ou labels */
+    --border-light: #E0E6EF; /* Bordas suaves */
+    --shadow-light: rgba(0, 0, 0, 0.05); /* Sombra bem sutil */
+    --shadow-medium: rgba(0, 0, 0, 0.1); /* Sombra um pouco mais pronunciada */
+    --code-bg: #282c34; /* Fundo do bloco de código */
+    --code-text: #abb2bf; /* Cor do texto do código */
+}
+
+/* Base reset e tipografia */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--background-light);
+    color: var(--text-dark);
     display: flex;
     min-height: 100vh;
+    padding: 20px; /* Adiciona um respiro nas bordas da tela */
 }
 
+/* Contêiner principal */
 .container {
     display: flex;
     width: 100%;
+    max-width: 1400px; /* Limita a largura máxima para melhor leitura */
+    margin: auto; /* Centraliza o contêiner */
+    border-radius: 12px;
+    overflow: hidden; /* Garante que as bordas arredondadas funcionem com o box-shadow interno */
+    box-shadow: 0 10px 30px var(--shadow-medium); /* Sombra mais destacada para o container */
 }
 
 /* Sidebar de Personalização */
 .sidebar {
-    width: 300px;
-    background-color: var(--sidebar-bg);
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    overflow-y: auto; /* Permite scroll se houver muitas opções */
+    width: 380px; /* Um pouco mais larga para acomodar os inputs */
+    background-color: var(--background-dark);
+    padding: 30px;
+    box-shadow: 4px 0 15px var(--shadow-light); /* Sombra para profundidade */
+    overflow-y: auto;
+    border-right: 1px solid var(--border-light); /* Linha divisória suave */
 }
 
 .sidebar h1 {
     text-align: center;
     color: var(--primary-color);
-    margin-bottom: 30px;
-    font-size: 1.5em;
+    margin-bottom: 40px;
+    font-size: 1.8em;
+    font-weight: 700;
 }
 
 .sidebar h2 {
-    font-size: 1.2em;
-    margin-top: 25px;
+    font-size: 1.3em;
+    margin-top: 30px;
     margin-bottom: 15px;
-    color: var(--secondary-color);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 5px;
+    color: var(--primary-color); /* H2s com a cor primária */
+    border-bottom: 2px solid var(--border-light); /* Linha mais definida */
+    padding-bottom: 8px;
+    font-weight: 600;
 }
 
 .sidebar label {
     display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 0.9em;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.95em;
+    color: var(--text-light);
 }
 
 .sidebar input[type="text"],
 .sidebar input[type="number"],
-.sidebar input[type="color"],
 .sidebar select,
 .sidebar textarea {
-    width: calc(100% - 20px); /* Ajusta para padding */
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 0.9em;
+    width: 100%; /* Ocupa 100% da largura */
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px; /* Bordas mais arredondadas */
+    font-size: 1em;
+    color: var(--text-dark);
+    transition: all 0.3s ease; /* Transição suave ao focar */
+    background-color: var(--background-light); /* Fundo leve para inputs */
+}
+
+.sidebar input[type="text"]:focus,
+.sidebar input[type="number"]:focus,
+.sidebar select:focus,
+.sidebar textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2); /* Sombra de foco colorida */
+    outline: none;
 }
 
 .sidebar input[type="color"] {
-    height: 38px; /* Ajusta altura para ficar alinhado */
-    padding: 2px;
+    width: 60px; /* Largura menor para o color picker */
+    height: 38px;
+    padding: 0;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    vertical-align: middle; /* Alinha com o label */
 }
 
 .sidebar textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px;
 }
 
 .component-options {
-    display: none; /* Oculta todas as opções por padrão */
-    animation: fadeIn 0.3s ease-out;
+    display: none;
+    animation: fadeIn 0.4s ease-out; /* Animação mais suave */
 }
 
 .component-options.active {
-    display: block; /* Mostra a opção ativa */
+    display: block;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .generate-code-btn {
     display: block;
     width: 100%;
-    padding: 12px 20px;
+    padding: 15px 25px;
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px; /* Bordas mais arredondadas */
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 600;
-    margin-top: 30px;
-    transition: background-color 0.3s ease;
+    margin-top: 40px; /* Mais espaço antes do botão */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeito de scale */
+    box-shadow: 0 5px 15px var(--shadow-medium); /* Sombra no botão */
 }
 
 .generate-code-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--secondary-color);
+    transform: translateY(-2px); /* Pequeno lift ao passar o mouse */
+}
+
+.generate-code-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px var(--shadow-medium);
 }
 
 /* Conteúdo Principal (Pré-visualização e Código) */
 .main-content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 30px; /* Mais padding */
     display: flex;
     flex-direction: column;
+    gap: 30px; /* Espaçamento entre as seções */
+    background-color: var(--background-light);
 }
 
 .preview-section, .code-section {
-    background-color: var(--sidebar-bg);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    background-color: var(--background-dark);
+    padding: 30px;
+    border-radius: 12px; /* Bordas mais arredondadas */
+    box-shadow: 0 5px 15px var(--shadow-light); /* Sombra suave */
 }
 
 .preview-section h2, .code-section h2 {
-    color: var(--primary-color);
+    color: var(--text-dark);
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.3em;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    font-weight: 700;
     text-align: center;
 }
 
@@ -144,83 +191,102 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 200px; /* Garante que a área de preview tenha altura */
-    border: 1px dashed var(--border-color);
-    border-radius: 4px;
-    background-color: #fefefe;
-    padding: 20px;
+    min-height: 250px; /* Altura mínima maior para o preview */
+    border: 2px dashed var(--border-light); /* Borda tracejada mais visível */
+    border-radius: 10px;
+    background-color: #fcfdff; /* Fundo ligeiramente diferente para o preview */
+    padding: 25px;
+    transition: all 0.2s ease-in-out; /* Transição para updates de estilo */
 }
 
 /* Estilos para os componentes gerados (botão, input, card) */
-/* Botão */
 .generated-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 12px 25px;
+    background-color: #6C63FF; /* Cor padrão, será sobrescrita pelo inline style */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.2s ease;
+    font-size: 1em;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
 }
 
 .generated-button:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(108, 99, 255, 0.3);
 }
 
-/* Campo de Texto (Input) */
+.generated-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(108, 99, 255, 0.1);
+}
+
 .generated-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 250px; /* Largura padrão */
+    padding: 12px 15px;
+    border: 1px solid #E0E6EF;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #2C3E50;
+    width: 300px; /* Largura padrão para inputs */
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    transition: all 0.2s ease;
 }
 
 .generated-input::placeholder {
-    color: #999;
+    color: #AAB7B8;
 }
 
-/* Card */
+.generated-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    outline: none;
+}
+
 .generated-card {
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-width: 300px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E6EF;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 8px 25px var(--shadow-medium); /* Sombra mais forte para o card */
+    max-width: 350px; /* Largura um pouco maior */
     text-align: center;
+    transition: all 0.2s ease;
 }
 
 .generated-card h3 {
     margin-top: 0;
-    color: #333;
-    font-size: 1.2em;
+    color: var(--text-dark);
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .generated-card p {
-    color: #555;
-    font-size: 0.9em;
-    line-height: 1.5;
+    color: var(--text-light);
+    font-size: 0.95em;
+    line-height: 1.6;
 }
-
 
 /* Seção de Código */
 .code-tabs {
     display: flex;
-    margin-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .code-tab-btn {
     background-color: transparent;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 20px;
     cursor: pointer;
     font-weight: 600;
-    color: var(--secondary-color);
-    border-bottom: 2px solid transparent;
+    color: var(--text-light);
+    border-bottom: 3px solid transparent; /* Borda inferior mais espessa */
     transition: all 0.3s ease;
+    font-size: 1em;
 }
 
 .code-tab-btn.active {
@@ -234,7 +300,9 @@ body {
 
 .code-panel {
     display: none;
-    position: relative; /* Para posicionar o botão de copiar */
+    position: relative;
+    border-radius: 8px; /* Bordas arredondadas para o painel de código */
+    overflow: hidden; /* Para garantir que o pre não vaze */
 }
 
 .code-panel.active {
@@ -244,50 +312,94 @@ body {
 .code-panel pre {
     background-color: var(--code-bg);
     color: var(--code-text);
-    padding: 15px;
-    border-radius: 4px;
+    padding: 20px;
+    border-radius: 8px;
     overflow-x: auto;
-    font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 0.9em;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace; /* Fonte mono mais estilosa */
+    font-size: 0.95em;
+    line-height: 1.5;
+    white-space: pre-wrap; /* Quebra de linha para códigos longos */
+    word-wrap: break-word;
 }
 
 .copy-code-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #4a4a4a;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
     color: white;
     border: none;
     padding: 8px 12px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.85em;
+    font-weight: 500;
     transition: background-color 0.3s ease;
+    opacity: 0.8; /* Levemente transparente por padrão */
 }
 
 .copy-code-btn:hover {
-    background-color: #666;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 1;
 }
 
-/* Responsividade Básica */
-@media (max-width: 768px) {
+/* Responsividade */
+@media (max-width: 1024px) {
     .container {
         flex-direction: column;
+        max-width: 90%; /* Ajusta para telas menores */
     }
     .sidebar {
         width: 100%;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        margin-bottom: 20px;
+        max-height: 60vh; /* Limita a altura da sidebar em telas menores */
+        box-shadow: 0 4px 15px var(--shadow-light);
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        border-radius: 12px 12px 0 0; /* Arredonda só em cima */
     }
     .main-content {
+        padding: 20px;
+    }
+    .preview-section, .code-section {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
         padding: 10px;
     }
+    .sidebar {
+        padding: 20px;
+    }
+    .sidebar h1 {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+    .sidebar h2 {
+        font-size: 1.1em;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .generate-code-btn {
+        font-size: 1em;
+        padding: 12px 20px;
+        margin-top: 25px;
+    }
+    .preview-section h2, .code-section h2 {
+        font-size: 1.4em;
+    }
+    .component-preview {
+        min-height: 180px;
+    }
     .code-panel pre {
-        font-size: 0.8em;
+        font-size: 0.85em;
+        padding: 15px;
     }
     .copy-code-btn {
-        position: static; /* Move o botão para baixo em telas menores */
+        position: static;
         margin-top: 10px;
         width: 100%;
+        opacity: 1; /* Sempre visível em telas pequenas */
     }
 }
