@@ -196,40 +196,35 @@ body {
     border-radius: 10px;
     background-color: #fcfdff; /* Fundo ligeiramente diferente para o preview */
     padding: 25px;
-    transition: all 0.2s ease-in-out; /* Transição para updates de estilo */
+    /* Remover transição aqui, pois será aplicada no elemento gerado */
 }
 
-/* --- ESTILOS DOS COMPONENTES GERADOS (MAIS MODERNOS) --- */
+/* --- ESTILOS DOS COMPONENTES GERADOS (AGORA MAIS GENÉRICOS E FOCADOS EM HOVER) --- */
 
-/* Botão Moderno */
+/* Botão Moderno - Estilos base que o JS NÃO vai definir inline */
 .generated-button {
-    padding: 12px 28px; /* Mais preenchimento horizontal */
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); /* Gradiente vibrante */
-    color: white;
-    border: none;
-    border-radius: 10px; /* Mais arredondado */
     cursor: pointer;
-    font-size: 1.05em; /* Ligeiramente maior */
-    font-weight: 600; /* Mais ousado */
-    letter-spacing: 0.5px; /* Pequeno espaçamento entre letras */
-    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3); /* Sombra mais pronunciada e colorida */
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); /* Curva de animação suave */
-    position: relative; /* Para efeitos hover */
-    overflow: hidden; /* Para o efeito de brilho */
+    border: none;
+    letter-spacing: 0.5px; /* Mantém o espaçamento de letras aqui */
+    /* Remove background, color, padding, border-radius, font-size, font-weight, box-shadow daqui */
+    /* Estas propriedades serão definidas pelo JS via style="" */
 }
 
-.generated-button:hover {
-    transform: translateY(-3px); /* Levanta mais ao passar o mouse */
-    box-shadow: 0 12px 30px rgba(108, 99, 255, 0.4); /* Sombra maior */
+/* Efeitos Hover do Botão (aplicados via classe pelo JS) */
+.button-hover-lift:hover {
+    transform: translateY(-3px);
+    /* box-shadow será definido inline e manipulado pelo JS */
 }
-
-.generated-button:active {
+.button-hover-lift:active {
     transform: translateY(0);
-    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+    /* box-shadow será definido inline e manipulado pelo JS */
 }
 
-/* Efeito de brilho no hover (opcional, mas moderno) */
-.generated-button::after {
+.button-hover-shine {
+    position: relative;
+    overflow: hidden;
+}
+.button-hover-shine::after {
     content: '';
     position: absolute;
     top: 0;
@@ -240,70 +235,67 @@ body {
     transform: skewX(-20deg);
     transition: left 0.5s ease;
 }
-
-.generated-button:hover::after {
+.button-hover-shine:hover::after {
     left: 100%;
 }
 
-/* Campo de Texto (Input) Moderno */
+.button-hover-darken:hover {
+    filter: brightness(0.9);
+}
+
+
+/* Campo de Texto (Input) Moderno - Estilos base que o JS NÃO vai definir inline */
 .generated-input {
-    padding: 12px 18px; /* Mais preenchimento */
-    border: 2px solid var(--border-light); /* Borda mais visível */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    font-size: 1em;
-    color: var(--text-dark);
-    width: 320px; /* Largura um pouco maior */
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06); /* Sombra suave */
-    transition: all 0.3s ease;
+    /* Remove padding, border, border-radius, font-size, color, width, background-color, box-shadow daqui */
+    /* Estas propriedades serão definidas pelo JS via style="" */
+    transition: all 0.3s ease; /* Transição para foco */
 }
 
 .generated-input::placeholder {
-    color: var(--text-light); /* Placeholder com cor do texto secundário */
-    opacity: 0.7; /* Levemente transparente */
+    /* Cor será definida inline, mas a opacidade pode ficar aqui */
+    opacity: 0.7;
 }
 
 .generated-input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.25); /* Sombra de foco mais forte e colorida */
+    /* A borda e sombra no foco serão sobrescritas pelo JS, mas a outline pode ficar */
     outline: none;
-    background-color: #FFF; /* Garante que o fundo não mude no foco */
 }
 
-/* Card Moderno */
+/* Card Moderno - Estilos base que o JS NÃO vai definir inline */
 .generated-card {
-    background: linear-gradient(145deg, #FFFFFF, #F8F9FB); /* Gradiente suave no fundo */
-    border: none; /* Sem borda, apenas sombra */
-    border-radius: 18px; /* Bordas bem arredondadas */
-    padding: 30px; /* Mais preenchimento */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Sombra pronunciada e elegante */
-    max-width: 380px; /* Largura um pouco maior */
-    text-align: left; /* Texto alinhado à esquerda */
-    transition: all 0.3s ease;
-    cursor: grab; /* Indica que pode ser "arrastado" visualmente (sem funcionalidade real) */
+    border: none; /* Não tem borda padrão */
+    cursor: pointer; /* Indicativo de interação */
+    /* Remove background, border-radius, padding, box-shadow, text-align daqui */
+    /* Estas propriedades serão definidas pelo JS via style="" */
 }
 
-.generated-card:hover {
-    transform: translateY(-5px); /* Levanta mais ao passar o mouse */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Sombra ainda maior */
-}
-
+/* Estilos de sub-elementos do Card (sempre definidos aqui) */
 .generated-card h3 {
     margin-top: 0;
-    color: var(--text-dark);
-    font-size: 1.6em; /* Título maior */
-    font-weight: 700; /* Mais ousado */
+    font-weight: 600;
     margin-bottom: 12px;
     border-bottom: 1px solid var(--border-light); /* Separador sutil */
     padding-bottom: 8px;
+    /* color, font-size serão definidos pelo JS */
 }
 
 .generated-card p {
-    color: var(--text-light);
-    font-size: 1em; /* Texto do parágrafo um pouco maior */
     line-height: 1.7; /* Espaçamento entre linhas confortável */
     margin-bottom: 0;
+    /* color, font-size serão definidos pelo JS */
 }
+
+/* Efeitos Hover do Card (aplicados via classe pelo JS) */
+.card-hover-lift:hover {
+    transform: translateY(-5px);
+    /* box-shadow será definido inline e manipulado pelo JS */
+}
+
+.card-hover-pop:hover {
+    transform: scale(1.02);
+    /* box-shadow será definido inline e manipulado pelo JS */
+}
+
 
 /* Seção de Código */
 .code-tabs {
