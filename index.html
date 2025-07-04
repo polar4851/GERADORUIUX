@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Componentes UI/UX</title>
+    <title>Gerador de Componentes UI/UX 2025</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
                     <option value="button">Botão</option>
                     <option value="input">Campo de Texto</option>
                     <option value="card">Card</option>
-                    </select>
+                </select>
             </div>
 
             <div id="buttonOptions" class="component-options active">
@@ -66,7 +66,7 @@
                 <label for="buttonGradient">Usar Gradiente?</label>
                 <input type="checkbox" id="buttonGradient" checked>
 
-                <div id="buttonGradientColors" style="display: block;">
+                <div id="buttonGradientColors">
                     <label for="buttonGradientColor1">Cor Gradiente 1:</label>
                     <input type="color" id="buttonGradientColor1" value="#6C63FF">
                     <label for="buttonGradientColor2">Cor Gradiente 2:</label>
@@ -163,7 +163,6 @@
                 </select>
             </div>
 
-
             <button class="generate-code-btn" onclick="generateCode()">Gerar Código</button>
         </aside>
 
@@ -171,7 +170,18 @@
             <section class="preview-section">
                 <h2>Pré-visualização do Componente</h2>
                 <div class="component-preview" id="componentPreview">
-                    <button class="generated-button">Super Botão</button>
+                    <button class="generated-button" style="
+                        background: linear-gradient(135deg, #6C63FF 0%, #8D8BEE 100%);
+                        color: #ffffff;
+                        padding: 14px 30px;
+                        border-radius: 10px;
+                        font-size: 18px;
+                        font-weight: 600;
+                        box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    ">Super Botão</button>
                 </div>
             </section>
 
@@ -180,7 +190,7 @@
                 <div class="code-tabs">
                     <button class="code-tab-btn active" onclick="showCodeTab('html')">HTML</button>
                     <button class="code-tab-btn" onclick="showCodeTab('css')">CSS</button>
-                    <button class="code-tab-btn" onclick="showCodeTab('js')">JavaScript (se aplicável)</button>
+                    <button class="code-tab-btn" onclick="showCodeTab('js')">JavaScript</button>
                 </div>
                 <div id="htmlCode" class="code-panel active">
                     <pre><code class="language-html"></code></pre>

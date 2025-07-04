@@ -196,28 +196,23 @@ body {
     border-radius: 10px;
     background-color: #fcfdff; /* Fundo ligeiramente diferente para o preview */
     padding: 25px;
-    /* Remover transição aqui, pois será aplicada no elemento gerado */
 }
 
-/* --- ESTILOS DOS COMPONENTES GERADOS (AGORA MAIS GENÉRICOS E FOCADOS EM HOVER) --- */
+/* --- ESTILOS DOS COMPONENTES GERADOS (MINIMALISTAS NO CSS, MAIORIA VIA JS) --- */
 
-/* Botão Moderno - Estilos base que o JS NÃO vai definir inline */
+/* Botão Moderno */
 .generated-button {
     cursor: pointer;
-    border: none;
-    letter-spacing: 0.5px; /* Mantém o espaçamento de letras aqui */
-    /* Remove background, color, padding, border-radius, font-size, font-weight, box-shadow daqui */
-    /* Estas propriedades serão definidas pelo JS via style="" */
+    border: none; /* Sempre sem borda */
+    letter-spacing: 0.5px;
 }
 
 /* Efeitos Hover do Botão (aplicados via classe pelo JS) */
 .button-hover-lift:hover {
     transform: translateY(-3px);
-    /* box-shadow será definido inline e manipulado pelo JS */
 }
 .button-hover-lift:active {
     transform: translateY(0);
-    /* box-shadow será definido inline e manipulado pelo JS */
 }
 
 .button-hover-shine {
@@ -244,29 +239,19 @@ body {
 }
 
 
-/* Campo de Texto (Input) Moderno - Estilos base que o JS NÃO vai definir inline */
+/* Campo de Texto (Input) Moderno */
 .generated-input {
-    /* Remove padding, border, border-radius, font-size, color, width, background-color, box-shadow daqui */
-    /* Estas propriedades serão definidas pelo JS via style="" */
-    transition: all 0.3s ease; /* Transição para foco */
+    outline: none; /* Remove outline padrão ao focar */
 }
 
 .generated-input::placeholder {
-    /* Cor será definida inline, mas a opacidade pode ficar aqui */
     opacity: 0.7;
 }
 
-.generated-input:focus {
-    /* A borda e sombra no foco serão sobrescritas pelo JS, mas a outline pode ficar */
-    outline: none;
-}
-
-/* Card Moderno - Estilos base que o JS NÃO vai definir inline */
+/* Card Moderno */
 .generated-card {
-    border: none; /* Não tem borda padrão */
-    cursor: pointer; /* Indicativo de interação */
-    /* Remove background, border-radius, padding, box-shadow, text-align daqui */
-    /* Estas propriedades serão definidas pelo JS via style="" */
+    border: none;
+    cursor: pointer;
 }
 
 /* Estilos de sub-elementos do Card (sempre definidos aqui) */
@@ -276,24 +261,20 @@ body {
     margin-bottom: 12px;
     border-bottom: 1px solid var(--border-light); /* Separador sutil */
     padding-bottom: 8px;
-    /* color, font-size serão definidos pelo JS */
 }
 
 .generated-card p {
-    line-height: 1.7; /* Espaçamento entre linhas confortável */
+    line-height: 1.7;
     margin-bottom: 0;
-    /* color, font-size serão definidos pelo JS */
 }
 
 /* Efeitos Hover do Card (aplicados via classe pelo JS) */
 .card-hover-lift:hover {
     transform: translateY(-5px);
-    /* box-shadow será definido inline e manipulado pelo JS */
 }
 
 .card-hover-pop:hover {
     transform: scale(1.02);
-    /* box-shadow será definido inline e manipulado pelo JS */
 }
 
 
@@ -311,7 +292,7 @@ body {
     cursor: pointer;
     font-weight: 600;
     color: var(--text-light);
-    border-bottom: 3px solid transparent; /* Borda inferior mais espessa */
+    border-bottom: 3px solid transparent;
     transition: all 0.3s ease;
     font-size: 1em;
 }
@@ -328,8 +309,8 @@ body {
 .code-panel {
     display: none;
     position: relative;
-    border-radius: 8px; /* Bordas arredondadas para o painel de código */
-    overflow: hidden; /* Para garantir que o pre não vaze */
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .code-panel.active {
@@ -342,10 +323,10 @@ body {
     padding: 20px;
     border-radius: 8px;
     overflow-x: auto;
-    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace; /* Fonte mono mais estilosa */
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
     font-size: 0.95em;
     line-height: 1.5;
-    white-space: pre-wrap; /* Quebra de linha para códigos longos */
+    white-space: pre-wrap;
     word-wrap: break-word;
 }
 
@@ -353,7 +334,7 @@ body {
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
     border: none;
     padding: 8px 12px;
@@ -362,7 +343,7 @@ body {
     font-size: 0.85em;
     font-weight: 500;
     transition: background-color 0.3s ease;
-    opacity: 0.8; /* Levemente transparente por padrão */
+    opacity: 0.8;
 }
 
 .copy-code-btn:hover {
@@ -374,15 +355,15 @@ body {
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
-        max-width: 90%; /* Ajusta para telas menores */
+        max-width: 90%;
     }
     .sidebar {
         width: 100%;
-        max-height: 60vh; /* Limita a altura da sidebar em telas menores */
+        max-height: 60vh;
         box-shadow: 0 4px 15px var(--shadow-light);
         border-right: none;
         border-bottom: 1px solid var(--border-light);
-        border-radius: 12px 12px 0 0; /* Arredonda só em cima */
+        border-radius: 12px 12px 0 0;
     }
     .main-content {
         padding: 20px;
@@ -427,6 +408,6 @@ body {
         position: static;
         margin-top: 10px;
         width: 100%;
-        opacity: 1; /* Sempre visível em telas pequenas */
+        opacity: 1;
     }
 }
