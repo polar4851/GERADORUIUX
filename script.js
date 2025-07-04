@@ -1,150 +1,91 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const taskInput = document.getElementById('taskInput');
-    const descriptionInput = document.getElementById('descriptionInput');
-    const addTaskBtn = document.getElementById('addTaskBtn');
-    const taskList = document.getElementById('taskList');
+window.addEventListener('load', () => {
 
-    // Carregar tarefas do LocalStorage ao iniciar
-    loadTasks();
+    // --- SELEÇÃO DE ELEMENTOS DO DOM ---
+    const form = document.querySelector("#new-task-form");
+    const input = document.querySelector("#new-task-input");
+    const tasksContainer = document.querySelector("#tasks-container");
+    const dateDisplay = document.querySelector("#date-display");
 
-    // Event listener para adicionar tarefa ao clicar no botão
-    addTaskBtn.addEventListener('click', addTask);
+    // --- FUNÇÃO PARA EXIBIR A DATA ATUAL ---
+    const displayCurrentDate = () => {
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateDisplay.textContent = today.toLocaleDateString('pt-BR', options);
+    };
 
-    // Event listener para adicionar tarefa ao pressionar Enter no campo de título
-    taskInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            addTask();
-        }
-    });
+    displayCurrentDate(); // Chama a função ao carregar a página
 
-    // Event listener para adicionar tarefa ao pressionar Enter no campo de descrição (com Shift para nova linha)
-    descriptionInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault(); // Impede a quebra de linha padrão do textarea
-            addTask();
-        }
-    });
+    // --- EVENT LISTENER PARA SUBMISSÃO DO FORMULÁRIO ---
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o recarregamento da página
 
-    function addTask() {
-        const taskText = taskInput.value.trim();
-        const descriptionText = descriptionInput.value.trim();
+        const taskText = input.value.trim();
 
-        if (taskText === '') {
-            alert('Ops! O título da tarefa não pode estar vazio.');
+        // Validação: não adicionar tarefa se o campo estiver vazio
+        if (!taskText) {
+            alert("Por favor, digite uma tarefa.");
             return;
         }
 
-        const task = {
-            id: Date.now(), // ID único baseado no timestamp
-            text: taskText,
-            description: descriptionText,
-            completed: false
-        };
+        createTaskElement(taskText);
 
-        createTaskElement(task);
-        saveTask(task); // Salva a tarefa no LocalStorage
-        
-        // Limpa os campos após adicionar
-        taskInput.value = '';
-        descriptionInput.value = '';
-        taskInput.focus(); // Retorna o foco para o campo de título
-    }
+        // Limpa o input e foca nele novamente
+        input.value = "";
+        input.focus();
+    });
 
-    function createTaskElement(task) {
-        const listItem = document.createElement('li');
-        listItem.dataset.id = task.id; // Armazena o ID no elemento DOM para fácil acesso
+    // --- FUNÇÃO PARA CRIAR O ELEMENTO DA TAREFA ---
+    const createTaskElement = (text) => {
+        // Cria o elemento principal da tarefa
+        const task_el = document.createElement('div');
+        task_el.classList.add('task');
 
-        const taskContentDiv = document.createElement('div');
-        taskContentDiv.classList.add('task-content');
+        // Cria o conteúdo da tarefa (o texto)
+        const task_content_el = document.createElement('div');
+        task_content_el.classList.add('content');
+        task_content_el.textContent = text;
 
-        const taskTitleSpan = document.createElement('span');
-        taskTitleSpan.classList.add('task-title');
-        taskTitleSpan.textContent = task.text;
+        // Cria a div de ações (botão de deletar)
+        const task_actions_el = document.createElement('div');
+        task_actions_el.classList.add('actions');
 
-        const taskDescriptionSpan = document.createElement('span');
-        taskDescriptionSpan.classList.add('task-description');
-        taskDescriptionSpan.textContent = task.description;
+        // Cria o botão de deletar com ícone SVG
+        const task_delete_btn = document.createElement('button');
+        task_delete_btn.classList.add('delete-btn');
+        task_delete_btn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>`;
 
-        const actionsDiv = document.createElement('div');
-        actionsDiv.classList.add('actions');
+        // Monta o elemento da tarefa
+        task_actions_el.appendChild(task_delete_btn);
+        task_el.appendChild(task_content_el);
+        task_el.appendChild(task_actions_el);
 
-        const completeBtn = document.createElement('button');
-        completeBtn.textContent = task.completed ? 'Desmarcar' : 'Completar';
-        completeBtn.classList.add('complete-btn');
-        completeBtn.addEventListener('click', () => toggleComplete(listItem, task));
+        // Adiciona a nova tarefa no início da lista para melhor visibilidade
+        tasksContainer.prepend(task_el);
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Remover';
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.addEventListener('click', () => deleteTask(listItem, task.id));
+        // --- EVENT LISTENERS PARA AS AÇÕES DA TAREFA ---
 
-        // Aplica a classe 'completed' se a tarefa já estiver marcada
-        if (task.completed) {
-            listItem.classList.add('completed');
-        }
+        // Marcar/desmarcar como concluída ao clicar no texto
+        task_content_el.addEventListener('click', () => {
+            task_el.classList.toggle('done');
+        });
 
-        // Monta o elemento da lista
-        taskContentDiv.appendChild(taskTitleSpan);
-        if (task.description) { // Só adiciona a descrição se houver uma
-            taskContentDiv.appendChild(taskDescriptionSpan);
-        }
-        
-        actionsDiv.appendChild(completeBtn);
-        actionsDiv.appendChild(deleteBtn);
-        
-        listItem.appendChild(taskContentDiv);
-        listItem.appendChild(actionsDiv);
-        
-        // Adiciona a nova tarefa no topo da lista
-        taskList.prepend(listItem);
-    }
+        // Deletar a tarefa
+        task_delete_btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Impede que o clique se propague para outros elementos
 
-    function toggleComplete(listItem, task) {
-        task.completed = !task.completed;
-        listItem.classList.toggle('completed');
-        const completeBtn = listItem.querySelector('.complete-btn');
-        completeBtn.textContent = task.completed ? 'Desmarcar' : 'Completar';
-        updateTask(task); // Atualiza o estado no LocalStorage
-    }
-
-    function deleteTask(listItem, id) {
-        // Animação de saída antes de remover
-        listItem.style.opacity = '0';
-        listItem.style.transform = 'translateY(10px) scale(0.9)';
-        listItem.style.transition = 'all 0.3s ease-out';
-
-        setTimeout(() => {
-            taskList.removeChild(listItem);
-            removeTask(id); // Remove do LocalStorage
-        }, 300); // Tempo da animação
-    }
-
-    // --- Funções para gerenciar o LocalStorage ---
-    function getTasks() {
-        return JSON.parse(localStorage.getItem('elegantTasks')) || [];
-    }
-
-    function saveTask(newTask) {
-        const tasks = getTasks();
-        tasks.push(newTask);
-        localStorage.setItem('elegantTasks', JSON.stringify(tasks));
-    }
-
-    function updateTask(updatedTask) {
-        let tasks = getTasks();
-        tasks = tasks.map(task => task.id === updatedTask.id ? updatedTask : task);
-        localStorage.setItem('elegantTasks', JSON.stringify(tasks));
-    }
-
-    function removeTask(id) {
-        let tasks = getTasks();
-        tasks = tasks.filter(task => task.id !== id);
-        localStorage.setItem('elegantTasks', JSON.stringify(tasks));
-    }
-
-    function loadTasks() {
-        const tasks = getTasks();
-        // Carrega as tarefas na ordem inversa para que as mais recentes apareçam no topo
-        tasks.slice().reverse().forEach(task => createTaskElement(task)); 
+            // Adiciona a classe para a animação de saída
+            task_el.classList.add('fade-out');
+            
+            // Remove o elemento do DOM após a animação terminar
+            task_el.addEventListener('animationend', () => {
+                tasksContainer.removeChild(task_el);
+            });
+        });
     }
 });
