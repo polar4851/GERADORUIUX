@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const componentPreview = document.getElementById('componentPreview');
     const htmlOutput = document.querySelector('#htmlCode code');
     const cssOutput = document.querySelector('#cssCode code');
-    const jsOutput = document.querySelector('#jsCode code'); // Para futuro uso, se houver JS do componente
+    const jsOutput = document.querySelector('#jsCode code');
 
     // Opções de personalização por componente
     const buttonOptions = document.getElementById('buttonOptions');
@@ -16,76 +16,114 @@ document.addEventListener('DOMContentLoaded', () => {
         text: document.getElementById('buttonText'),
         bgColor: document.getElementById('buttonBgColor'),
         textColor: document.getElementById('buttonTextColor'),
-        padding: document.getElementById('buttonPadding'),
+        paddingY: document.getElementById('buttonPaddingY'),
+        paddingX: document.getElementById('buttonPaddingX'),
         borderRadius: document.getElementById('buttonBorderRadius'),
         fontSize: document.getElementById('buttonFontSize'),
-        width: document.getElementById('buttonWidth'),
-        height: document.getElementById('buttonHeight')
+        fontWeight: document.getElementById('buttonFontWeight'),
+        hoverEffect: document.getElementById('buttonHoverEffect'),
+        shadow: document.getElementById('buttonShadow'),
+        gradient: document.getElementById('buttonGradient'),
+        gradientColor1: document.getElementById('buttonGradientColor1'),
+        gradientColor2: document.getElementById('buttonGradientColor2'),
+        gradientColorsDiv: document.getElementById('buttonGradientColors')
     };
 
     const inputInputs = {
         placeholder: document.getElementById('inputTextPlaceholder'),
+        width: document.getElementById('inputWidth'),
+        padding: document.getElementById('inputPaddingInput'),
         borderColor: document.getElementById('inputBorderColor'),
+        borderWidth: document.getElementById('inputBorderWidth'),
+        borderStyle: document.getElementById('inputBorderStyle'),
+        borderRadius: document.getElementById('inputBorderRadius'),
         bgColor: document.getElementById('inputBgColor'),
         textColor: document.getElementById('inputTextColor'),
-        padding: document.getElementById('inputPaddingInput'), // Renomeado para evitar conflito com 'padding' geral
-        borderRadius: document.getElementById('inputBorderRadius'),
-        fontSize: document.getElementById('inputFontSize')
+        fontSize: document.getElementById('inputFontSize'),
+        shadow: document.getElementById('inputShadow')
     };
 
-     const cardInputs = {
+    const cardInputs = {
         title: document.getElementById('cardTitle'),
         content: document.getElementById('cardContent'),
         bgColor: document.getElementById('cardBgColor'),
-        borderColor: document.getElementById('cardBorderColor'),
-        borderRadius: document.getElementById('cardBorderRadiusCard'), // Renomeado
-        padding: document.getElementById('cardPaddingCard'), // Renomeado
-        shadow: document.getElementById('cardShadow')
+        borderRadius: document.getElementById('cardBorderRadiusCard'),
+        padding: document.getElementById('cardPaddingCard'),
+        shadow: document.getElementById('cardShadow'),
+        titleColor: document.getElementById('cardTitleColor'),
+        contentColor: document.getElementById('cardContentColor'),
+        titleFontSize: document.getElementById('cardTitleFontSize'),
+        contentFontSize: document.getElementById('cardContentFontSize'),
+        textAlign: document.getElementById('cardTextAlign'),
+        hoverEffect: document.getElementById('cardHoverEffect')
     };
 
-
-    // Funções para renderizar os componentes
+    // --- Funções para Renderizar os Componentes no Preview ---
     function renderButton() {
         const text = buttonInputs.text.value;
         const bgColor = buttonInputs.bgColor.value;
         const textColor = buttonInputs.textColor.value;
-        const padding = buttonInputs.padding.value + 'px';
+        const paddingY = buttonInputs.paddingY.value + 'px';
+        const paddingX = buttonInputs.paddingX.value + 'px';
         const borderRadius = buttonInputs.borderRadius.value + 'px';
         const fontSize = buttonInputs.fontSize.value + 'px';
-        const width = buttonInputs.width.value ? buttonInputs.width.value + 'px' : 'auto';
-        const height = buttonInputs.height.value ? buttonInputs.height.value + 'px' : 'auto';
+        const fontWeight = buttonInputs.fontWeight.value;
+        const shadow = buttonInputs.shadow.value;
+        const useGradient = buttonInputs.gradient.checked;
+        const gradientColor1 = buttonInputs.gradientColor1.value;
+        const gradientColor2 = buttonInputs.gradientColor2.value;
+        const hoverEffect = buttonInputs.hoverEffect.value;
+
+        let bgColorStyle = useGradient ? `linear-gradient(135deg, ${gradientColor1} 0%, ${gradientColor2} 100%)` : bgColor;
+
+        let hoverClass = '';
+        if (hoverEffect === 'lift') hoverClass = 'button-hover-lift';
+        else if (hoverEffect === 'shine') hoverClass = 'button-hover-shine';
+        else if (hoverEffect === 'darken') hoverClass = 'button-hover-darken';
+
 
         componentPreview.innerHTML = `
-            <button class="generated-button" style="
-                background-color: ${bgColor};
+            <button class="generated-button ${hoverClass}" style="
+                background: ${bgColorStyle};
                 color: ${textColor};
-                padding: ${padding};
+                padding: ${paddingY} ${paddingX};
                 border-radius: ${borderRadius};
                 font-size: ${fontSize};
-                width: ${width};
-                height: ${height};
+                font-weight: ${fontWeight};
+                box-shadow: ${shadow};
+                border: none; /* Garante que não tenha borda padrão */
+                cursor: pointer;
+                transition: all 0.3s ease; /* Transição para suavizar a renderização */
+                position: relative; /* Necessário para o efeito shine */
+                overflow: hidden; /* Necessário para o efeito shine */
             ">${text}</button>
         `;
     }
 
     function renderInput() {
         const placeholder = inputInputs.placeholder.value;
+        const width = inputInputs.width.value + 'px';
+        const padding = inputInputs.padding.value + 'px';
         const borderColor = inputInputs.borderColor.value;
+        const borderWidth = inputInputs.borderWidth.value + 'px';
+        const borderStyle = inputInputs.borderStyle.value;
+        const borderRadius = inputInputs.borderRadius.value + 'px';
         const bgColor = inputInputs.bgColor.value;
         const textColor = inputInputs.textColor.value;
-        const padding = inputInputs.padding.value + 'px';
-        const borderRadius = inputInputs.borderRadius.value + 'px';
         const fontSize = inputInputs.fontSize.value + 'px';
-
+        const shadow = inputInputs.shadow.value;
 
         componentPreview.innerHTML = `
             <input type="text" class="generated-input" placeholder="${placeholder}" style="
-                border-color: ${borderColor};
+                width: ${width};
+                padding: ${padding};
+                border: ${borderWidth} ${borderStyle} ${borderColor};
+                border-radius: ${borderRadius};
                 background-color: ${bgColor};
                 color: ${textColor};
-                padding: ${padding};
-                border-radius: ${borderRadius};
                 font-size: ${fontSize};
+                box-shadow: ${shadow};
+                transition: all 0.3s ease;
             ">
         `;
     }
@@ -94,21 +132,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = cardInputs.title.value;
         const content = cardInputs.content.value;
         const bgColor = cardInputs.bgColor.value;
-        const borderColor = cardInputs.borderColor.value;
         const borderRadius = cardInputs.borderRadius.value + 'px';
         const padding = cardInputs.padding.value + 'px';
         const shadow = cardInputs.shadow.value;
+        const titleColor = cardInputs.titleColor.value;
+        const contentColor = cardInputs.contentColor.value;
+        const titleFontSize = cardInputs.titleFontSize.value + 'px';
+        const contentFontSize = cardInputs.contentFontSize.value + 'px';
+        const textAlign = cardInputs.textAlign.value;
+        const hoverEffect = cardInputs.hoverEffect.value;
+
+        let hoverClass = '';
+        if (hoverEffect === 'lift') hoverClass = 'card-hover-lift';
+        else if (hoverEffect === 'pop') hoverClass = 'card-hover-pop';
 
         componentPreview.innerHTML = `
-            <div class="generated-card" style="
+            <div class="generated-card ${hoverClass}" style="
                 background-color: ${bgColor};
-                border-color: ${borderColor};
                 border-radius: ${borderRadius};
                 padding: ${padding};
                 box-shadow: ${shadow};
+                text-align: ${textAlign};
+                transition: all 0.3s ease;
             ">
-                <h3>${title}</h3>
-                <p>${content}</p>
+                <h3 style="
+                    color: ${titleColor};
+                    font-size: ${titleFontSize};
+                    margin-bottom: 10px;
+                ">${title}</h3>
+                <p style="
+                    color: ${contentColor};
+                    font-size: ${contentFontSize};
+                    line-height: 1.6;
+                ">${content}</p>
             </div>
         `;
     }
@@ -126,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'card':
                 renderCard();
                 break;
-            // Adicione mais casos aqui para novos componentes
         }
     }
 
@@ -138,25 +193,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById(componentId).classList.add('active');
     }
 
-    // Event Listeners para atualização em tempo real
+    // --- Lógica de Event Listeners ---
     componentTypeSelect.addEventListener('change', () => {
         const selectedComponent = componentTypeSelect.value;
         showComponentOptions(selectedComponent + 'Options');
-        updatePreview(); // Atualiza a pré-visualização quando o componente muda
+        updatePreview();
     });
 
     // Adiciona listeners para todos os inputs de personalização
-    Object.values(buttonInputs).forEach(input => input.addEventListener('input', updatePreview));
+    // Usando destructuring para iterar sobre os objetos de inputs
+    Object.values(buttonInputs).forEach(input => {
+        if (input.type !== 'checkbox') { // Ignora checkbox temporariamente
+            input.addEventListener('input', updatePreview);
+        }
+    });
+    buttonInputs.gradient.addEventListener('change', () => {
+        buttonInputs.gradientColorsDiv.style.display = buttonInputs.gradient.checked ? 'block' : 'none';
+        updatePreview();
+    });
+
+
     Object.values(inputInputs).forEach(input => input.addEventListener('input', updatePreview));
     Object.values(cardInputs).forEach(input => input.addEventListener('input', updatePreview));
 
-
-    // Função para gerar o código HTML e CSS
+    // --- Geração de Código HTML, CSS e JS ---
     window.generateCode = function() {
         const selectedComponent = componentTypeSelect.value;
         let html = '';
         let css = '';
-        let js = ''; // Para JS específico do componente, se necessário
+        let js = '';
+        let className = '';
 
         const previewElement = componentPreview.querySelector('.generated-' + selectedComponent);
         if (!previewElement) {
@@ -166,44 +232,194 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // HTML
-        html = previewElement.outerHTML;
+        // Definindo o nome da classe CSS para o componente
+        className = `my-${selectedComponent}`; // Ex: my-button, my-input, my-card
 
-        // CSS
-        const styles = window.getComputedStyle(previewElement);
-        css += `.${previewElement.classList[0]} {\n`; // Pega a primeira classe (ex: generated-button)
-        for (let i = 0; i < styles.length; i++) {
-            const propName = styles.item(i);
-            const propValue = styles.getPropertyValue(propName);
-            // Filtra propriedades que são auto ou que não foram definidas explicitamente (para CSS mais limpo)
-            // Você pode refinar este filtro
-            if (propValue && propValue !== 'auto' && propValue !== 'initial' && propValue !== 'unset' && propValue !== 'normal' && propValue !== '0px') {
-                 // Pequeno ajuste para evitar propriedades muito específicas que podem ser noise
-                 if (propName.startsWith('border-') && propName !== 'border-radius' && propValue === '0px none rgb(0, 0, 0)') continue;
-                 if (propName.includes('transition') || propName.includes('animation') || propName.includes('user-select')) continue;
+        // --- Geração de HTML ---
+        // Clonar o elemento de preview para remover estilos inline e classes de hover temporárias
+        const cleanElement = previewElement.cloneNode(true);
+        cleanElement.removeAttribute('style'); // Remove estilos inline
+        cleanElement.classList.remove('button-hover-lift', 'button-hover-shine', 'button-hover-darken'); // Remove classes de hover da UI
+        cleanElement.classList.remove('card-hover-lift', 'card-hover-pop');
+        cleanElement.className = className; // Define a classe final
 
-                css += `  ${propName}: ${propValue};\n`;
-            }
+        // Ajustes específicos para HTML aninhado
+        if (selectedComponent === 'card') {
+            const h3 = cleanElement.querySelector('h3');
+            const p = cleanElement.querySelector('p');
+            if (h3) h3.removeAttribute('style'); // Remove estilos inline do h3
+            if (p) p.removeAttribute('style'); // Remove estilos inline do p
         }
-        css += `}\n`;
 
-        // Se for um input, adicione o placeholder CSS
-        if (selectedComponent === 'input') {
-            const placeholderColor = inputInputs.textColor.value; // Assume a cor do texto para o placeholder
-            css += `\n.${previewElement.classList[0]}::placeholder {\n  color: ${placeholderColor};\n}\n`;
+        html = cleanElement.outerHTML;
+
+
+        // --- Geração de CSS ---
+        const styles = window.getComputedStyle(previewElement);
+        css += `.${className} {\n`;
+
+        // Propriedades CSS comuns (copiadas do estilo inline)
+        const cssPropsToCopy = [
+            'background-color', 'background', 'color', 'padding', 'border-radius', 'font-size', 'font-weight',
+            'width', 'height', 'border', 'border-color', 'border-width', 'border-style', 'box-shadow',
+            'text-align'
+        ];
+
+        cssPropsToCopy.forEach(prop => {
+            let value = styles.getPropertyValue(prop);
+            if (value && value !== 'auto' && value !== 'initial' && value !== 'unset' && value !== 'normal' && value !== '0px' && value !== '0px none rgb(0, 0, 0)') {
+                 // Trata gradiente separadamente se background for um gradiente
+                if (prop === 'background-color' && value.startsWith('rgb')) {
+                    const useGradient = buttonInputs.gradient.checked;
+                    if (useGradient && selectedComponent === 'button') {
+                        const gradColor1 = buttonInputs.gradientColor1.value;
+                        const gradColor2 = buttonInputs.gradientColor2.value;
+                        css += `  background: linear-gradient(135deg, ${gradColor1} 0%, ${gradColor2} 100%);\n`;
+                    } else {
+                        css += `  ${prop}: ${value};\n`;
+                    }
+                } else if (prop === 'background' && value.startsWith('linear-gradient')) {
+                     // Não adicionar 'background' se já adicionamos 'background-color' ou gradiente específico
+                }
+                else {
+                    css += `  ${prop}: ${value};\n`;
+                }
+            }
+        });
+
+        // Adiciona transições padrão para todos os componentes gerados
+        css += `  transition: all 0.3s ease; /* Transição para um visual suave */\n`;
+
+        css += `}\n\n`;
+
+        // CSS específico por componente para efeitos hover ou sub-elementos
+        if (selectedComponent === 'button') {
+            const hoverEffect = buttonInputs.hoverEffect.value;
+            if (hoverEffect === 'lift') {
+                css += `.${className}:hover {\n  transform: translateY(-3px);\n  box-shadow: ${buttonInputs.shadow.value.replace('0 8px', '0 12px').replace('0.3', '0.4')};\n}\n`;
+            } else if (hoverEffect === 'shine') {
+                 // Adiciona a animação de brilho
+                css += `.${className} {\n  position: relative;\n  overflow: hidden;\n}\n\n`;
+                css += `.${className}::after {\n`;
+                css += `  content: '';\n  position: absolute;\n  top: 0;\n  left: -100%;\n  width: 100%;\n  height: 100%;\n`;
+                css += `  background: rgba(255, 255, 255, 0.2); /* Brilho branco */\n`;
+                css += `  transform: skewX(-20deg);\n  transition: left 0.5s ease;\n`;
+                css += `}\n\n`;
+                css += `.${className}:hover::after {\n  left: 100%;\n}\n`;
+            } else if (hoverEffect === 'darken') {
+                css += `.${className}:hover {\n  filter: brightness(0.9);\n}\n`;
+            }
+            css += `.${className}:active {\n  transform: translateY(0);\n  box-shadow: ${buttonInputs.shadow.value.replace('0 8px', '0 4px').replace('0.3', '0.2')};\n}\n`;
+
+            css += `.${className} {\n  letter-spacing: 0.5px;\n}\n`; // Adiciona espaçamento entre letras
+        } else if (selectedComponent === 'input') {
+            const placeholderColor = inputInputs.textColor.value; // Usa a cor do texto para o placeholder
+            css += `.${className}::placeholder {\n  color: ${placeholderColor};\n  opacity: 0.7;\n}\n\n`;
+            css += `.${className}:focus {\n`;
+            css += `  border-color: ${inputInputs.borderColor.value};\n`; // Mantém a cor da borda no foco
+            css += `  box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.25);\n`; // Sombra de foco
+            css += `  outline: none;\n`;
+            css += `}\n`;
+        } else if (selectedComponent === 'card') {
+            const titleColor = cardInputs.titleColor.value;
+            const contentColor = cardInputs.contentColor.value;
+            const titleFontSize = cardInputs.titleFontSize.value + 'px';
+            const contentFontSize = cardInputs.contentFontSize.value + 'px';
+            const hoverEffect = cardInputs.hoverEffect.value;
+
+            css += `.${className} h3 {\n`;
+            css += `  color: ${titleColor};\n`;
+            css += `  font-size: ${titleFontSize};\n`;
+            css += `  margin-bottom: 12px;\n`;
+            css += `  font-weight: 600;\n`; // Garante peso da fonte
+            css += `  border-bottom: 1px solid ${cardInputs.borderColor ? cardInputs.borderColor.value : '#E0E6EF'};\n`; // Adiciona borda no título
+            css += `  padding-bottom: 8px;\n`;
+            css += `}\n\n`;
+
+            css += `.${className} p {\n`;
+            css += `  color: ${contentColor};\n`;
+            css += `  font-size: ${contentFontSize};\n`;
+            css += `  line-height: 1.7;\n`;
+            css += `}\n\n`;
+
+            if (hoverEffect === 'lift') {
+                css += `.${className}:hover {\n  transform: translateY(-5px);\n  box-shadow: ${cardInputs.shadow.value.replace('0 15px', '0 20px').replace('0.15', '0.2')};\n}\n`;
+            } else if (hoverEffect === 'pop') {
+                css += `.${className}:hover {\n  transform: scale(1.02);\n  box-shadow: ${cardInputs.shadow.value.replace('0 15px', '0 25px').replace('0.15', '0.25')};\n}\n`;
+            }
+
+            css += `.${className} {\n  cursor: pointer; /* Indicativo de interação */\n}\n`; // Adiciona cursor para o card
         }
 
 
         // Atualiza as áreas de código
-        htmlOutput.textContent = html;
-        cssOutput.textContent = css;
-        jsOutput.textContent = js; // Por enquanto, vazio para a maioria dos componentes
+        htmlOutput.textContent = formatHTML(html);
+        cssOutput.textContent = formatCSS(css);
+        jsOutput.textContent = js; // Continua vazio, a menos que adicione JS para o componente
 
-        // Ativa a aba HTML por padrão após gerar
         showCodeTab('html');
     };
 
-    // Funções para as abas de código
+    // --- Funções Auxiliares para Formatação de Código ---
+    function formatHTML(html) {
+        // Usa DOMParser para parsear e serializar o HTML de forma limpa
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const serializer = new XMLSerializer();
+        let formatted = serializer.serializeToString(doc.body.firstChild || doc.body); // Pega o primeiro filho do body ou o body
+
+        // Remove a tag <body> se ela for serializada
+        formatted = formatted.replace(/<\/?body>/g, '').trim();
+
+        // Adiciona indentação básica (você pode usar uma biblioteca como `prettier` para algo mais robusto)
+        const indent = '  '; // 2 espaços
+        formatted = formatted.replace(/>\s*</g, '><'); // Remove espaços entre tags
+        formatted = formatted.split('><').map(line => {
+            if (line.startsWith('/')) { // Tag de fechamento
+                return line;
+            }
+            return line;
+        }).join('>\n<');
+
+        let indentLevel = 0;
+        formatted = formatted.split('\n').map(line => {
+            if (line.trim().startsWith('</') || line.trim().startsWith('/>')) {
+                indentLevel--;
+            }
+            const indentedLine = indent.repeat(indentLevel) + line.trim();
+            if (line.trim().startsWith('<') && !line.trim().startsWith('</') && !line.trim().endsWith('/>') && !line.includes('=')) { // Tag de abertura que não é vazia
+                indentLevel++;
+            }
+            return indentedLine;
+        }).join('\n');
+
+
+        return formatted;
+    }
+
+    function formatCSS(css) {
+        // Remove linhas vazias e espaços extras
+        css = css.replace(/^\s*\n/gm, '').replace(/\s{2,}/g, ' ');
+
+        let formatted = '';
+        let indentLevel = 0;
+        const indent = '  ';
+
+        css.split('\n').forEach(line => {
+            line = line.trim();
+            if (line.endsWith('{')) {
+                formatted += indent.repeat(indentLevel) + line + '\n';
+                indentLevel++;
+            } else if (line.startsWith('}')) {
+                indentLevel--;
+                formatted += indent.repeat(indentLevel) + line + '\n';
+            } else if (line !== '') {
+                formatted += indent.repeat(indentLevel) + line + '\n';
+            }
+        });
+        return formatted;
+    }
+
+    // --- Funções para as Abas de Código e Copiar ---
     window.showCodeTab = function(tabName) {
         document.querySelectorAll('.code-panel').forEach(panel => {
             panel.classList.remove('active');
@@ -216,7 +432,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`.code-tab-btn[onclick="showCodeTab('${tabName}')"]`).classList.add('active');
     };
 
-    // Função para copiar código para a área de transferência
     window.copyCode = function(type) {
         const codeElement = document.querySelector(`#${type}Code code`);
         const textToCopy = codeElement.textContent;

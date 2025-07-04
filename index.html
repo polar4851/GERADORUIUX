@@ -22,78 +22,147 @@
 
             <div id="buttonOptions" class="component-options active">
                 <h2>Opções do Botão</h2>
+
                 <label for="buttonText">Texto:</label>
-                <input type="text" id="buttonText" value="Clique Aqui">
+                <input type="text" id="buttonText" value="Super Botão">
 
                 <label for="buttonBgColor">Cor de Fundo:</label>
-                <input type="color" id="buttonBgColor" value="#007bff">
+                <input type="color" id="buttonBgColor" value="#6C63FF">
 
                 <label for="buttonTextColor">Cor do Texto:</label>
                 <input type="color" id="buttonTextColor" value="#ffffff">
 
-                <label for="buttonPadding">Preenchimento (px):</label>
-                <input type="number" id="buttonPadding" value="10" min="0">
+                <label for="buttonPaddingY">Preenchimento Vertical (px):</label>
+                <input type="number" id="buttonPaddingY" value="14" min="0">
+
+                <label for="buttonPaddingX">Preenchimento Horizontal (px):</label>
+                <input type="number" id="buttonPaddingX" value="30" min="0">
 
                 <label for="buttonBorderRadius">Borda Arredondada (px):</label>
-                <input type="number" id="buttonBorderRadius" value="5" min="0">
+                <input type="number" id="buttonBorderRadius" value="10" min="0">
 
                 <label for="buttonFontSize">Tamanho da Fonte (px):</label>
-                <input type="number" id="buttonFontSize" value="16" min="8">
+                <input type="number" id="buttonFontSize" value="18" min="8">
 
-                <label for="buttonWidth">Largura (px, opcional):</label>
-                <input type="number" id="buttonWidth" value="" placeholder="Automático" min="0">
+                <label for="buttonFontWeight">Peso da Fonte:</label>
+                <select id="buttonFontWeight">
+                    <option value="400">Normal (400)</option>
+                    <option value="500">Médio (500)</option>
+                    <option value="600" selected>Semibold (600)</option>
+                    <option value="700">Bold (700)</option>
+                </select>
 
-                <label for="buttonHeight">Altura (px, opcional):</label>
-                <input type="number" id="buttonHeight" value="" placeholder="Automático" min="0">
+                <label for="buttonHoverEffect">Efeito Hover:</label>
+                <select id="buttonHoverEffect">
+                    <option value="none">Nenhum</option>
+                    <option value="lift" selected>Levantar (Lift)</option>
+                    <option value="shine">Brilho (Shine)</option>
+                    <option value="darken">Escurecer</option>
+                </select>
+
+                <label for="buttonShadow">Sombra (valores CSS):</label>
+                <input type="text" id="buttonShadow" value="0 8px 20px rgba(108, 99, 255, 0.3)" placeholder="Ex: 0 4px 8px rgba(0,0,0,0.1)">
+
+                <label for="buttonGradient">Usar Gradiente?</label>
+                <input type="checkbox" id="buttonGradient" checked>
+
+                <div id="buttonGradientColors" style="display: block;">
+                    <label for="buttonGradientColor1">Cor Gradiente 1:</label>
+                    <input type="color" id="buttonGradientColor1" value="#6C63FF">
+                    <label for="buttonGradientColor2">Cor Gradiente 2:</label>
+                    <input type="color" id="buttonGradientColor2" value="#8D8BEE">
+                </div>
             </div>
 
             <div id="inputOptions" class="component-options">
                 <h2>Opções do Campo de Texto</h2>
+
                 <label for="inputTextPlaceholder">Placeholder:</label>
-                <input type="text" id="inputTextPlaceholder" value="Digite algo...">
+                <input type="text" id="inputTextPlaceholder" value="Digite seu nome...">
+
+                <label for="inputWidth">Largura (px):</label>
+                <input type="number" id="inputWidth" value="320" min="50">
+
+                <label for="inputPadding">Preenchimento (px):</label>
+                <input type="number" id="inputPaddingInput" value="12" min="0">
 
                 <label for="inputBorderColor">Cor da Borda:</label>
-                <input type="color" id="inputBorderColor" value="#ccc">
+                <input type="color" id="inputBorderColor" value="#E0E6EF">
+
+                <label for="inputBorderWidth">Largura da Borda (px):</label>
+                <input type="number" id="inputBorderWidth" value="2" min="0">
+
+                <label for="inputBorderStyle">Estilo da Borda:</label>
+                <select id="inputBorderStyle">
+                    <option value="solid" selected>Sólida</option>
+                    <option value="dashed">Tracejada</option>
+                    <option value="dotted">Pontilhada</option>
+                </select>
+
+                <label for="inputBorderRadius">Borda Arredondada (px):</label>
+                <input type="number" id="inputBorderRadius" value="10" min="0">
 
                 <label for="inputBgColor">Cor de Fundo:</label>
                 <input type="color" id="inputBgColor" value="#ffffff">
 
                 <label for="inputTextColor">Cor do Texto:</label>
-                <input type="color" id="inputTextColor" value="#333">
-
-                 <label for="inputPadding">Preenchimento (px):</label>
-                <input type="number" id="inputPaddingInput" value="10" min="0">
-
-                <label for="inputBorderRadius">Borda Arredondada (px):</label>
-                <input type="number" id="inputBorderRadius" value="4" min="0">
+                <input type="color" id="inputTextColor" value="#2C3E50">
 
                 <label for="inputFontSize">Tamanho da Fonte (px):</label>
                 <input type="number" id="inputFontSize" value="16" min="8">
+
+                <label for="inputShadow">Sombra (valores CSS):</label>
+                <input type="text" id="inputShadow" value="0 4px 10px rgba(0,0,0,0.06)" placeholder="Ex: 0 2px 5px rgba(0,0,0,0.1)">
             </div>
 
-             <div id="cardOptions" class="component-options">
+            <div id="cardOptions" class="component-options">
                 <h2>Opções do Card</h2>
+
                 <label for="cardTitle">Título do Card:</label>
-                <input type="text" id="cardTitle" value="Título do Card">
+                <input type="text" id="cardTitle" value="Título Atraente">
 
                 <label for="cardContent">Conteúdo do Card:</label>
-                <textarea id="cardContent">Este é o conteúdo do seu card. Personalize como quiser!</textarea>
+                <textarea id="cardContent">Este é o conteúdo do seu card moderno. Adapte-o para o seu propósito!</textarea>
 
                 <label for="cardBgColor">Cor de Fundo:</label>
-                <input type="color" id="cardBgColor" value="#f8f9fa">
-
-                <label for="cardBorderColor">Cor da Borda:</label>
-                <input type="color" id="cardBorderColor" value="#e0e0e0">
+                <input type="color" id="cardBgColor" value="#FFFFFF">
 
                 <label for="cardBorderRadius">Borda Arredondada (px):</label>
-                <input type="number" id="cardBorderRadiusCard" value="8" min="0">
+                <input type="number" id="cardBorderRadiusCard" value="18" min="0">
 
                 <label for="cardPadding">Preenchimento (px):</label>
-                <input type="number" id="cardPaddingCard" value="20" min="0">
+                <input type="number" id="cardPaddingCard" value="30" min="0">
 
                 <label for="cardShadow">Sombra (valores CSS):</label>
-                <input type="text" id="cardShadow" value="0 4px 8px rgba(0,0,0,0.1)" placeholder="Ex: 0 4px 8px rgba(0,0,0,0.1)">
+                <input type="text" id="cardShadow" value="0 15px 40px rgba(0, 0, 0, 0.15)" placeholder="Ex: 0 8px 20px rgba(0,0,0,0.1)">
+
+                <label for="cardTitleColor">Cor do Título:</label>
+                <input type="color" id="cardTitleColor" value="#2C3E50">
+
+                <label for="cardContentColor">Cor do Conteúdo:</label>
+                <input type="color" id="cardContentColor" value="#7F8C8D">
+
+                <label for="cardTitleFontSize">Tamanho do Título (px):</label>
+                <input type="number" id="cardTitleFontSize" value="26" min="12">
+
+                <label for="cardContentFontSize">Tamanho do Conteúdo (px):</label>
+                <input type="number" id="cardContentFontSize" value="16" min="10">
+
+                <label for="cardTextAlign">Alinhamento do Texto:</label>
+                <select id="cardTextAlign">
+                    <option value="left" selected>Esquerda</option>
+                    <option value="center">Centro</option>
+                    <option value="right">Direita</option>
+                </select>
+
+                <label for="cardHoverEffect">Efeito Hover:</label>
+                <select id="cardHoverEffect">
+                    <option value="none">Nenhum</option>
+                    <option value="lift" selected>Levantar (Lift)</option>
+                    <option value="pop">Pop</option>
+                </select>
             </div>
+
 
             <button class="generate-code-btn" onclick="generateCode()">Gerar Código</button>
         </aside>
@@ -102,7 +171,7 @@
             <section class="preview-section">
                 <h2>Pré-visualização do Componente</h2>
                 <div class="component-preview" id="componentPreview">
-                    <button class="generated-button">Clique Aqui</button>
+                    <button class="generated-button">Super Botão</button>
                 </div>
             </section>
 
